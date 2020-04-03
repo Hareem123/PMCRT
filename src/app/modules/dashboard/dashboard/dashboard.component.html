@@ -1,0 +1,177 @@
+<div class="page">
+  <div class="page-main">
+    <app-header></app-header>
+    <!-- Horizantal menu-->
+    <div class="container">
+      <div class="side-app">
+        <div class="page-header">
+          <h4 class="page-title">Dashboard</h4>
+        </div>
+        <div class="row row-cards">
+          <div class="col-sm-12 col-md-8 col-lg-4">
+            <div class="card" (click)="totalVolunteers('item1', 'Profession')">
+              <div class="card-status bg-purple br-tr-3 br-tl-3"></div>
+              <div class="card-body row">
+                <div class="col">
+                  <div class="text-black countup">Total Volunteers</div>
+                  <div class="h2 m-0 text-primary counter font-30">
+                    <b><span id="totalVolunteer"></span></b>
+                  </div>
+                </div>
+                <div class="col-auto align-self-center ">
+                  <div class="card-value float-right text-purple">
+                    <div
+                      class="icon icon-shape bg-gradient-primary rounded-circle text-white"
+                    >
+                      <i class="fas fa-map-marker text-white"></i>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-12 col-md-8 col-lg-4">
+            <div class="card">
+              <div class="card-status bg-teal br-tr-3 br-tl-3"></div>
+              <div class="card-body">
+                <div class="row">
+                  <div class="col">
+                    <div class="text-black">Today's Registrations</div>
+                    <div class="h3 m-0  text-teal counter font-30">
+                      <b><span id="registerations"></span></b>
+                    </div>
+                  </div>
+                  <div class="col-auto align-self-center">
+                    <div class="card-value float-right text-purple">
+                      <div
+                        class="icon icon-shape bg-gradient-teal rounded-circle text-white"
+                      >
+                        <i class="fas fa-pen-square text-white"></i>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-12 col-md-8 col-lg-4">
+            <div
+              class="card"
+              (click)="totalVolunteers('Volunteers At Work', 'Field')"
+            >
+              <div class="card-status bg-yellow br-tr-3 br-tl-3"></div>
+              <div class="card-body ">
+                <div class="row">
+                  <div class="col">
+                    <div class="text-black">Volunteers At Work</div>
+                    <div class="h3 m-0 text-orange counter font-30">
+                      <b><span id="work"></span></b>
+                    </div>
+                  </div>
+                  <div class="col-auto align-self-center">
+                    <div class="card-value float-right text-purple">
+                      <div
+                        class="icon icon-shape bg-gradient-orange rounded-circle text-white"
+                      >
+                        <i class="fas fa-briefcase text-white"></i>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row row-cards">
+          <div class="col-sm-12 col-md-6 col-lg-4">
+            <div
+              class="card"
+              (click)="
+                totalVolunteers('Volunteers By Profession', 'Profession')
+              "
+            >
+              <div class="card-status bg-success br-tr-3 br-tl-3"></div>
+              <div class="card-body row">
+                <div class="col">
+                  <div class="text-black countup">Volunteers By Profession</div>
+                  <div class="h3 m-0 text-success counter font-30">
+                    <b><span id="profession"></span></b>
+                  </div>
+                </div>
+                <div class="col-auto align-self-center ">
+                  <div class="card-value float-right text-success">
+                    <div
+                      class="icon icon-shape bg-gradient-success rounded-circle text-white"
+                    >
+                      <i class="fas fa-id-card-alt text-white"></i>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-sm-12 col-md-6 col-lg-4">
+            <div
+              class="card"
+              (click)="totalVolunteers('Volunteers By Skills', 'Skills')"
+            >
+              <div class="card-status bg-gradient-pink br-tr-3 br-tl-3"></div>
+              <div class="card-body">
+                <div class="row">
+                  <div class="col">
+                    <div class="text-black">Volunteers By Skills</div>
+                    <div class="h3 m-0  text-pink counter font-30">
+                      <b><span id="skillCounter"></span></b>
+                    </div>
+                  </div>
+                  <div class="col-auto align-self-center">
+                    <div class="card-value float-right text-purple">
+                      <div
+                        class="icon icon-shape bg-gradient-pink rounded-circle text-white"
+                      >
+                        <i class="fas fa-brain text-white"></i>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-sm-12 col-md-6 col-lg-4">
+            <div
+              class="card"
+              (click)="totalVolunteers('Volunteers By Gender', 'Gender')"
+            >
+              <div class="card-status bg-red br-tr-3 br-tl-3"></div>
+              <div class="card-body ">
+                <div class="row">
+                  <div class="col">
+                    <div class="text-black">Volunteers By Gender</div>
+                    <div class="h2 m-0 text-orange counter font-30">
+                      <b><span id="genderCounter"></span></b>
+                    </div>
+                  </div>
+                  <div class="col-auto align-self-center">
+                    <div class="card-value float-right text-red">
+                      <div
+                        class="icon icon-shape bg-gradient-red rounded-circle text-white"
+                      >
+                        <!-- <i class="fas fa-people-arrows"></i> -->
+                        <i class="fas fa-user text-white"></i>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<a href="#top" id="back-to-top" style="display: inline;"
+  ><i class="fas fa-angle-up"></i
+></a>

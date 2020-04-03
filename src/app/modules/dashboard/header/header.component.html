@@ -1,0 +1,80 @@
+<header class="app-header header shadow-none relative">
+  <div id="particles-js"></div>
+  <div class="container">
+    <!-- Header Background Animation-->
+    <div id="canvas" class="gradient"></div>
+    <!-- Navbar Right Menu-->
+    <div class="container-fluid">
+      <div class="d-flex">
+        <a class="header-brand" [routerLink]="['/dashboard']">
+          <img
+            alt="ren logo"
+            class="header-brand-img"
+            src="assets/images/brand/logo.jpeg"
+          />
+        </a>
+        <div class="d-flex order-lg-2 ml-auto">
+          <div class="dropdown">
+            <a
+              class="nav-link pr-0 leading-none d-flex"
+              data-toggle="dropdown"
+              href="#"
+            >
+              <span
+                class="avatar avatar-md brround"
+                style="background-image: url(assets/images/faces/female/25.jpg)"
+              ></span>
+              <span class="ml-2 d-none d-lg-block">
+                <span class="text-white">{{
+                  currentUser["response"]["email"]
+                }}</span>
+              </span>
+            </a>
+            <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
+              <a
+                class="dropdown-item"
+                href="javascript:void(0);"
+                (click)="logout()"
+                ><i class="dropdown-icon mdi mdi-logout-variant"></i> Sign
+                out</a
+              >
+            </div>
+          </div>
+        </div>
+        <a
+          href="#"
+          class="header-toggler d-lg-none ml-3 ml-lg-0"
+          data-toggle="collapse"
+          data-target="#headerMenuCollapse"
+        >
+          <span class="header-toggler-icon"></span>
+        </a>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="ren-navbar" id="headerMenuCollapse">
+  <div class="container">
+    <ul class="nav">
+      <li class="nav-item">
+        <a class="nav-link active" [routerLink]="['/dashboard']">
+          <i class="fas fa-home"></i>
+          <span>DASHBOARD</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" [routerLink]="['/volunteer']">
+          <i class="fas fa-hands-helping"></i>
+          <span>Volunteer</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" [routerLink]="['/filter']">
+          <i class="fas fa-chart-bar"></i>
+          <span>Reports</span>
+        </a>
+      </li>
+    </ul>
+  </div>
+</div>
