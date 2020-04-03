@@ -23,9 +23,15 @@ const routes: Routes = [
   },
   {
     path: "volunteer",
-    canActivate: [AuthGuardService],
+    // canActivate: [AuthGuardService],
     // data: { role: ["Server Admin", "Admin"] },
     loadChildren: "./modules/volunteer/volunteer.module#VolunteerModule"
+  },
+  {
+    path: "report",
+    // canActivate: [AuthGuardService],
+    // data: { role: ["Server Admin", "Admin"] },
+    loadChildren: "./modules/report/report.module#ReportModule"
   },
   {
     path: "",
