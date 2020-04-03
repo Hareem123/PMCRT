@@ -16,7 +16,7 @@ import { SearchPipe } from 'src/app/pipes/search.pipe';
     FormsModule,
     ReactiveFormsModule,
     DetailDescriptionRoutingModule,
-    DataTableModule
+    DataTableModule,
   ],
   bootstrap: [HeaderComponent]
 })
