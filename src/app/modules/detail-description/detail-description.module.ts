@@ -7,15 +7,16 @@ import { HeaderComponent } from "./header/header.component";
 import { DataTableModule } from "angular-6-datatable";
 
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { SearchPipe } from 'src/app/pipes/search.pipe';
 // import { HeaderModule } from "../header/header.module";
 @NgModule({
-  declarations: [DetailDescriptionComponent, HeaderComponent],
+  declarations: [DetailDescriptionComponent, HeaderComponent, SearchPipe],
   imports: [
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
     DetailDescriptionRoutingModule,
-    DataTableModule
+    DataTableModule,
   ],
   bootstrap: [HeaderComponent]
 })
