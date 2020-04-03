@@ -5,7 +5,6 @@ import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { ActivatedRoute } from "@angular/router";
 // import "rxjs/add/operator/filter";
 
-import * as $ from "jquery";
 import { DetailDashboardService } from "../../../services/detail-dashboard.service";
 
 @Component({
@@ -16,6 +15,7 @@ import { DetailDashboardService } from "../../../services/detail-dashboard.servi
 export class DetailDescriptionComponent implements OnInit {
   searchForm: FormGroup;
   public searchTxt: any;
+
   constructor(
     private detailDashboardService: DetailDashboardService,
     private formBuilder: FormBuilder,
@@ -27,15 +27,9 @@ export class DetailDescriptionComponent implements OnInit {
   tableData: any = [];
 
   ngOnInit() {
-    this.searchForm = this.formBuilder.group({
-      dateRange: [null, Validators.required],
-      area: [null, Validators.required],
-      pmt: [null]
-    });
     this.route.queryParamMap.subscribe(params => {
       this.paramsData = { ...params.keys, ...params };
     });
-    console.log(this.paramsData.params);
     this.getCardData(this.paramsData.params);
   }
 
