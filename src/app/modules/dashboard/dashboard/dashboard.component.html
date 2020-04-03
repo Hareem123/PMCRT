@@ -9,7 +9,7 @@
         </div>
         <div class="row row-cards">
           <div class="col-sm-12 col-md-8 col-lg-4">
-            <div class="card" (click)="totalVolunteers('item1', 'Profession')">
+            <div class="card" (click)="totalVolunteers('totalVolunteers', 'Total Volunteers')">
               <div class="card-status bg-purple br-tr-3 br-tl-3"></div>
               <div class="card-body row">
                 <div class="col">
@@ -31,7 +31,7 @@
             </div>
           </div>
           <div class="col-sm-12 col-md-8 col-lg-4">
-            <div class="card">
+            <div class="card" (click)="totalVolunteers('todaysRegistrations', 'Todays Registrations')">
               <div class="card-status bg-teal br-tr-3 br-tl-3"></div>
               <div class="card-body">
                 <div class="row">
@@ -57,7 +57,7 @@
           <div class="col-sm-12 col-md-8 col-lg-4">
             <div
               class="card"
-              (click)="totalVolunteers('Volunteers At Work', 'Field')"
+              (click)="totalVolunteers('volunteersAtWork', 'Volunteers At Work')"
             >
               <div class="card-status bg-yellow br-tr-3 br-tl-3"></div>
               <div class="card-body ">
@@ -87,7 +87,7 @@
             <div
               class="card"
               (click)="
-                totalVolunteers('Volunteers By Profession', 'Profession')
+                totalVolunteers('volunteersByProfession', 'Volunteers By Profession')
               "
             >
               <div class="card-status bg-success br-tr-3 br-tl-3"></div>
@@ -95,7 +95,7 @@
                 <div class="col">
                   <div class="text-black countup">Volunteers By Profession</div>
                   <div class="h3 m-0 text-success counter font-30">
-                    <b><span id="profession"></span></b>
+                    <b><span id="volunteersByProfession"></span></b>
                   </div>
                 </div>
                 <div class="col-auto align-self-center ">
@@ -114,7 +114,7 @@
           <div class="col-sm-12 col-md-6 col-lg-4">
             <div
               class="card"
-              (click)="totalVolunteers('Volunteers By Skills', 'Skills')"
+              (click)="totalVolunteers('volunteersBySkills', 'Volunteers By Skills')"
             >
               <div class="card-status bg-gradient-pink br-tr-3 br-tl-3"></div>
               <div class="card-body">
@@ -142,7 +142,7 @@
           <div class="col-sm-12 col-md-6 col-lg-4">
             <div
               class="card"
-              (click)="totalVolunteers('Volunteers By Gender', 'Gender')"
+              (click)="totalVolunteers('volunteersByGender', 'Gender')"
             >
               <div class="card-status bg-red br-tr-3 br-tl-3"></div>
               <div class="card-body ">
