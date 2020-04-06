@@ -1,9 +1,6 @@
 import { Injectable } from "@angular/core";
-import { Router } from "@angular/router";
-import { ToastrService } from "ngx-toastr";
 import { BaseUrlService } from "./base-url.service";
 import {
-  HttpClientModule,
   HttpClient,
   HttpHeaders
 } from "@angular/common/http";
@@ -16,9 +13,7 @@ export class VolunteerService {
 
   constructor(
     private baseUrl: BaseUrlService,
-    private router: Router,
     private httpClient: HttpClient,
-    private toastr: ToastrService
   ) {}
 
   getVolunteerData() {

@@ -3,7 +3,6 @@ import { ToastrService } from "ngx-toastr";
 import { Router } from "@angular/router";
 
 import { CountUp } from "CountUp.js";
-import * as $ from "jquery";
 import { DashboardService } from "../../../services/dashboard.service";
 
 @Component({
@@ -14,10 +13,6 @@ import { DashboardService } from "../../../services/dashboard.service";
 export class DashboardComponent implements OnInit {
   totalVolunteer: any;
   registerations: any;
-  // work: any;
-  // profession: any;
-  // skillCounter: any;
-  // genderCounter: any;
 
   constructor(
     private dashboardService: DashboardService,
@@ -31,18 +26,6 @@ export class DashboardComponent implements OnInit {
 
     this.registerations = new CountUp("registerations", 0);
     this.registerations.start();
-
-    // this.work = new CountUp("work", 0);
-    // this.work.start();
-
-    // this.profession = new CountUp("profession", 0);
-    // this.profession.start();
-
-    // this.skillCounter = new CountUp("skillCounter", 0);
-    // this.skillCounter.start();
-
-    // this.genderCounter = new CountUp("genderCounter", 0);
-    // this.genderCounter.start();
 
     this.getDashboardData();
   }

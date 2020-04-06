@@ -1,5 +1,4 @@
 import { Component, OnInit } from "@angular/core";
-import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { ToastrService } from "ngx-toastr";
 import { Router } from "@angular/router";
 
@@ -17,12 +16,9 @@ export class HeaderComponent implements OnInit {
   ngOnInit() {
     var user = localStorage.getItem("authorization");
     this.currentUser = JSON.parse(user);
-    // if (this.currentUser["response"]["role"] == "Server Admin") {
-    //   this.isLoggedIn = true;
-    // }
   }
   logout() {
-    localStorage.removeItem("authStreetLightUser");
+    localStorage.removeItem("authorization");
     this.router.navigate(["/login"]);
   }
 }

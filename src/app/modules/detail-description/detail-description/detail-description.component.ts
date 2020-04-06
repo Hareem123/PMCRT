@@ -26,14 +26,12 @@ export class DetailDescriptionComponent implements OnInit {
     private detailDashboardService: DetailDashboardService,
     private route: ActivatedRoute
   ) {}
-  // paramsData: ParamsData = { params: { title: '', field: ''} };
-  paramsData: any = {};
   tableData: any = [];
   title: String = '';
   field: String = '';
 
   ngOnInit() {
-    this.route.queryParamMap.subscribe(paramsData => {
+    this.route.queryParamMap.subscribe((paramsData: any) => {
       const { params } = paramsData;
       this.title = params.title;
       this.field = params.field;
