@@ -31,7 +31,7 @@ export class DetailDashboardService {
     let headers = new HttpHeaders({ Authorization: "jwt " + this.token });
     // tslint:disable-next-line: max-line-length
     return this.httpClient.get(
-      this.baseUrl.url() + "dashboardFilter?filter=" + filter.filed,
+      this.baseUrl.url() + "dashboardFilter?filter=" + filter,
       {
         headers: headers,
       }

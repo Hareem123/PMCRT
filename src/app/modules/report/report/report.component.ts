@@ -1,16 +1,11 @@
-import { Component, ElementRef, OnInit, ViewChild } from "@angular/core";
-// import { FormBuilder, FormGroup, Validators } from "@angular/forms";
-import { ToastrService } from "ngx-toastr";
-import { Router } from "@angular/router";
-
+import { Component, OnInit, ViewChild } from "@angular/core";
 import { DetailDashboardService } from "../../../services/detail-dashboard.service";
 
-import * as $ from "jquery";
 import * as Chart from "chart.js";
 
 import * as am4core from "@amcharts/amcharts4/core";
-import * as am4charts from "@amcharts/amcharts4/charts";
 import am4themes_animated from "@amcharts/amcharts4/themes/animated";
+import { createOfflineCompileUrlResolver } from '@angular/compiler';
 am4core.useTheme(am4themes_animated);
 
 @Component({
@@ -26,9 +21,6 @@ export class ReportComponent implements OnInit {
   volunteersBySkillChart: any;
   volunteersByGenderChart: any;
 
-  field: any = [];
-  field1: any = [];
-  count: any = [];
   chart = [];
   data: any = [];
 
@@ -47,54 +39,13 @@ export class ReportComponent implements OnInit {
   constructor(
     // private formBuilder: FormBuilder,
     private dashboardService: DetailDashboardService,
-    private router: Router,
-    private toastr: ToastrService
   ) {}
 
   ngOnInit() {
     this.dashboardService.getPieData("volunteersAtWork").subscribe((res) => {
       if (res["success"]) {
         const data = res["response"]["objects"];
-        data.forEach((element) => {
-          this.field.push(element.field);
-          this.count.push(element.count);
-        });
-        this.volunteersAtWorkChart = new Chart(
-          this.volunteersAtWorkChartRef.nativeElement,
-          {
-            type: "doughnut",
-            data: {
-              labels: this.field,
-              datasets: [
-                {
-                  label: "Volunteers At Work",
-                  backgroundColor: this.getRandomColor,
-                  data: this.count,
-                },
-              ],
-            },
-            options: {
-              tooltips: {
-                callbacks: {
-                  label: function (tooltipItem, data) {
-                    let label = data.labels[tooltipItem.index];
-                    let value =
-                      data.datasets[tooltipItem.datasetIndex].data[
-                        tooltipItem.index
-                      ];
-                    value = Number(value);
-                    return label + " :  " + value.toLocaleString();
-                  },
-                },
-              },
-              legend: {
-                onClick: (e) => e.stopPropagation(),
-                display: false,
-                position: "left",
-              },
-            },
-          }
-        );
+        this.volunteersAtWorkChart = this.createPieChartFromData(data, 'field', this.volunteersAtWorkChartRef.nativeElement, false);
       }
     });
     this.dashboardService
@@ -102,139 +53,23 @@ export class ReportComponent implements OnInit {
       .subscribe((res) => {
         if (res["success"]) {
           const data = res["response"]["objects"];
-          data.forEach((element) => {
-            this.field1.push(element.profession);
-            this.count.push(element.count);
-          });
-          this.volunteersByProfessionChart = new Chart(
-            this.volunteersByProfessionChartRef.nativeElement,
-            {
-              type: "doughnut",
-              data: {
-                labels: this.field1,
-                datasets: [
-                  {
-                    label: this.field1,
-                    backgroundColor: this.getRandomColor,
-                    data: this.count,
-                  },
-                ],
-              },
-              options: {
-                tooltips: {
-                  callbacks: {
-                    label: function (tooltipItem, data) {
-                      let label = data.labels[tooltipItem.index];
-                      let value =
-                        data.datasets[tooltipItem.datasetIndex].data[
-                          tooltipItem.index
-                        ];
-                      value = Number(value);
-                      return label + " :  " + value.toLocaleString();
-                    },
-                  },
-                },
-                legend: {
-                  onClick: (e) => e.stopPropagation(),
-                  display: false,
-                  position: "left",
-                },
-              },
-            }
-          );
+          this.volunteersByProfessionChart = this.createPieChartFromData(data, 'profession', this.volunteersByProfessionChartRef.nativeElement);
         }
       });
     this.dashboardService.getPieData("volunteersBySkills").subscribe((res) => {
       if (res["success"]) {
         const data = res["response"]["objects"];
-        data.forEach((element) => {
-          this.field1.push(element.profession);
-          this.count.push(element.count);
-        });
-        this.volunteersBySkillChart = new Chart(
-          this.volunteersBySkillChartRef.nativeElement,
-          {
-            type: "doughnut",
-            data: {
-              labels: this.field1,
-              datasets: [
-                {
-                  label: this.field1,
-                  backgroundColor: this.getRandomColor,
-                  data: this.count,
-                },
-              ],
-            },
-            options: {
-              tooltips: {
-                callbacks: {
-                  label: function (tooltipItem, data) {
-                    let label = data.labels[tooltipItem.index];
-                    let value =
-                      data.datasets[tooltipItem.datasetIndex].data[
-                        tooltipItem.index
-                      ];
-                    value = Number(value);
-                    return label + " :  " + value.toLocaleString();
-                  },
-                },
-              },
-              legend: {
-                onClick: (e) => e.stopPropagation(),
-                display: false,
-                position: "left",
-              },
-            },
-          }
-        );
+        this.volunteersBySkillChart = this.createPieChartFromData(data, 'skill', this.volunteersBySkillChartRef.nativeElement);
       }
     });
     this.dashboardService.getPieData("volunteersByGender").subscribe((res) => {
       if (res["success"]) {
         const data = res["response"]["objects"];
-        data.forEach((element) => {
-          this.field1.push(element.profession);
-          this.count.push(element.count);
-        });
-        this.volunteersByGenderChart = new Chart(
-          this.volunteersByGenderChartRef.nativeElement,
-          {
-            type: "doughnut",
-            data: {
-              labels: this.field1,
-              datasets: [
-                {
-                  label: this.field1,
-                  backgroundColor: this.getRandomColor,
-                  data: this.count,
-                },
-              ],
-            },
-            options: {
-              tooltips: {
-                callbacks: {
-                  label: function (tooltipItem, data) {
-                    let label = data.labels[tooltipItem.index];
-                    let value =
-                      data.datasets[tooltipItem.datasetIndex].data[
-                        tooltipItem.index
-                      ];
-                    value = Number(value);
-                    return label + " :  " + value.toLocaleString();
-                  },
-                },
-              },
-              legend: {
-                onClick: (e) => e.stopPropagation(),
-                display: false,
-                position: "left",
-              },
-            },
-          }
-        );
+        this.volunteersByGenderChart = this.createPieChartFromData(data, 'gender', this.volunteersByGenderChartRef.nativeElement)
       }
     });
   }
+
   getRandomColor() {
     var letters = "0123456789ABCDEF";
     var color = "#";
@@ -243,4 +78,60 @@ export class ReportComponent implements OnInit {
     }
     return color;
   }
+
+  createPieChartFromData(data, key, elementRef, showLabel = true) {
+        let fields = [];
+        let count = [];
+        let colors = [];
+        data.forEach((e) => {
+          fields.push(e[key]);
+          count.push(e.count);
+          colors.push(this.getRandomColor());
+        });
+      return new Chart(
+        elementRef,
+        {
+          type: "doughnut",
+          data: {
+            labels: fields,
+            datasets: [
+              {
+                label: fields,
+                backgroundColor: colors,
+                data: count,
+              },
+            ],
+          },
+          options: {
+            tooltips: {
+              callbacks: {
+                label: function (tooltipItem, data) {
+                  let label = data.labels[tooltipItem.index];
+                  let value =
+                    data.datasets[tooltipItem.datasetIndex].data[
+                      tooltipItem.index
+                    ];
+                  value = Number(value);
+                  return label + " :  " + value.toLocaleString();
+                },
+              },
+            },
+            legend: {
+              onClick: (e) => e.stopPropagation(),
+              display: showLabel,
+              position: "left",
+            },
+          },
+        }
+      );
+  }
+
+
+  truncateString(str, num) {
+    if (str.length <= num) {
+      return str
+    }
+    return str.slice(0, num) + '...'
+  }
+
 }
