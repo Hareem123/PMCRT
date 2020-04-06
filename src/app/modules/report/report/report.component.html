@@ -1,1 +1,67 @@
-<p>report works!</p>
+<div class="page">
+  <div class="page-main">
+    <app-header></app-header>
+    <!-- Horizantal menu-->
+    <div class="container">
+      <div class="side-app">
+        <div class="page-header">
+          <h4 class="page-title">Graphical Data</h4>
+        </div>
+
+        <div class="row">
+          <div class="col-lg-6">
+            <div class="card">
+              <div class="card-header">
+                <header>Volunteers At Work</header>
+              </div>
+              <div class="card-body">
+                <canvas class="height-400" #volunteersAtWorkChart>
+                  {{ volunteersAtWorkChart }}
+                </canvas>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-6">
+            <div class="card">
+              <div class="card-header">
+                <header class="">Volunteers By Profession</header>
+              </div>
+              <div class="card-body">
+                <canvas class="height-400" #volunteersByProfessionChart>
+                  {{ volunteersByProfessionChart }}
+                </canvas>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-6">
+            <div class="card">
+              <div class="card-header">
+                <header class="">Volunteers By Skills</header>
+              </div>
+              <div class="card-body">
+                <canvas class="height-400" #volunteersBySkillChart>
+                  {{ volunteersBySkillChart }}
+                </canvas>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <div class="card">
+              <div class="card-header">
+                <header>Volunteers By Gender</header>
+              </div>
+              <div class="card-body">
+                <canvas class="height-400" #volunteersByGenderChart>
+                  {{ volunteersByGenderChart }}
+                </canvas>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

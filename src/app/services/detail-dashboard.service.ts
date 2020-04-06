@@ -5,11 +5,11 @@ import { BaseUrlService } from "./base-url.service";
 import {
   HttpClientModule,
   HttpClient,
-  HttpHeaders
+  HttpHeaders,
 } from "@angular/common/http";
 
 @Injectable({
-  providedIn: "root"
+  providedIn: "root",
 })
 export class DetailDashboardService {
   token: any = "";
@@ -22,6 +22,7 @@ export class DetailDashboardService {
   ) {}
 
   getCardData(filter) {
+    console.log(filter);
     var user = localStorage.getItem("authorization");
     var obj = JSON.parse(user);
     if (obj) {
@@ -30,9 +31,25 @@ export class DetailDashboardService {
     let headers = new HttpHeaders({ Authorization: "jwt " + this.token });
     // tslint:disable-next-line: max-line-length
     return this.httpClient.get(
-      this.baseUrl.url() + "dashboardFilter?filter=" + filter.field,
+      this.baseUrl.url() + "dashboardFilter?filter=" + filter.filed,
       {
-        headers: headers
+        headers: headers,
+      }
+    );
+  }
+  getPieData(filter) {
+    console.log(filter);
+    var user = localStorage.getItem("authorization");
+    var obj = JSON.parse(user);
+    if (obj) {
+      this.token = obj["response"]["token"];
+    }
+    let headers = new HttpHeaders({ Authorization: "jwt " + this.token });
+    // tslint:disable-next-line: max-line-length
+    return this.httpClient.get(
+      this.baseUrl.url() + "dashboardFilter?filter=" + filter,
+      {
+        headers: headers,
       }
     );
   }
