@@ -38,6 +38,7 @@
     "moment": "^2.24.0",
     "ngx-toastr": "^11.3.3",
     "number-counter": "^1.0.3",
+    "random-material-color": "^1.0.5",
     "rxjs": "~6.4.0",
     "select2": "^4.0.13",
     "tslib": "^1.10.0",

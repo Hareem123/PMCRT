@@ -6,6 +6,8 @@ import * as Chart from "chart.js";
 import * as am4core from "@amcharts/amcharts4/core";
 import am4themes_animated from "@amcharts/amcharts4/themes/animated";
 import { createOfflineCompileUrlResolver } from '@angular/compiler';
+import randomMC from 'random-material-color';
+
 am4core.useTheme(am4themes_animated);
 
 @Component({
@@ -45,7 +47,7 @@ export class ReportComponent implements OnInit {
     this.dashboardService.getPieData("volunteersAtWork").subscribe((res) => {
       if (res["success"]) {
         const data = res["response"]["objects"];
-        this.volunteersAtWorkChart = this.createPieChartFromData(data, 'field', this.volunteersAtWorkChartRef.nativeElement, false);
+        this.volunteersAtWorkChart = this.createChartFromData(data, 'field', this.volunteersAtWorkChartRef.nativeElement, false, "bar");
       }
     });
     this.dashboardService
@@ -53,45 +55,41 @@ export class ReportComponent implements OnInit {
       .subscribe((res) => {
         if (res["success"]) {
           const data = res["response"]["objects"];
-          this.volunteersByProfessionChart = this.createPieChartFromData(data, 'profession', this.volunteersByProfessionChartRef.nativeElement);
+          this.volunteersByProfessionChart = this.createChartFromData(data, 'profession', this.volunteersByProfessionChartRef.nativeElement);
         }
       });
     this.dashboardService.getPieData("volunteersBySkills").subscribe((res) => {
       if (res["success"]) {
         const data = res["response"]["objects"];
-        this.volunteersBySkillChart = this.createPieChartFromData(data, 'skill', this.volunteersBySkillChartRef.nativeElement);
+        this.volunteersBySkillChart = this.createChartFromData(data, 'skill', this.volunteersBySkillChartRef.nativeElement);
       }
     });
     this.dashboardService.getPieData("volunteersByGender").subscribe((res) => {
       if (res["success"]) {
         const data = res["response"]["objects"];
-        this.volunteersByGenderChart = this.createPieChartFromData(data, 'gender', this.volunteersByGenderChartRef.nativeElement)
+        this.volunteersByGenderChart = this.createChartFromData(data, 'gender', this.volunteersByGenderChartRef.nativeElement)
       }
     });
   }
-
   getRandomColor() {
-    var letters = "0123456789ABCDEF";
-    var color = "#";
-    for (var i = 0; i < 6; i++) {
-      color += letters[Math.floor(Math.random() * 16)];
-    }
-    return color;
+    return randomMC.getColor();
   }
 
-  createPieChartFromData(data, key, elementRef, showLabel = true) {
+  createChartFromData(data, key, elementRef, showLabel = true, chartType = "doughnut") {
         let fields = [];
+        let legends = [];
         let count = [];
         let colors = [];
         data.forEach((e) => {
-          fields.push(e[key]);
+          legends.push(e[key]);
+          fields.push(this.truncateString(e[key], 10));
           count.push(e.count);
           colors.push(this.getRandomColor());
         });
       return new Chart(
         elementRef,
         {
-          type: "doughnut",
+          type: chartType,
           data: {
             labels: fields,
             datasets: [
@@ -106,7 +104,7 @@ export class ReportComponent implements OnInit {
             tooltips: {
               callbacks: {
                 label: function (tooltipItem, data) {
-                  let label = data.labels[tooltipItem.index];
+                  let label = legends[tooltipItem.index];
                   let value =
                     data.datasets[tooltipItem.datasetIndex].data[
                       tooltipItem.index
