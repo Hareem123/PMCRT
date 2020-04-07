@@ -7,6 +7,7 @@ import { DataTableModule } from "angular-6-datatable";
 
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { SearchPipe } from 'src/app/pipes/search.pipe';
+import { DashboardModule } from '../dashboard/dashboard.module';
 
 @NgModule({
   declarations: [DetailDescriptionComponent, SearchPipe],
@@ -16,6 +17,7 @@ import { SearchPipe } from 'src/app/pipes/search.pipe';
     ReactiveFormsModule,
     DetailDescriptionRoutingModule,
     DataTableModule,
+    DashboardModule,
   ],
 })
 export class DetailDescriptionModule {}

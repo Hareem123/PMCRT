@@ -8,9 +8,11 @@ import { ToastrModule } from "ngx-toastr";
 
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
+import { LoginModule } from './modules/login/login.module';
 import { HeaderComponent } from './modules/header/header/header.component';
+import { DashboardModule } from './modules/dashboard/dashboard.module';
 @NgModule({
-  declarations: [AppComponent, HeaderComponent],
+  declarations: [AppComponent],
   imports: [
     BrowserModule,
     CommonModule,
@@ -18,6 +20,8 @@ import { HeaderComponent } from './modules/header/header/header.component';
     HttpClientModule,
     AppRoutingModule,
     BrowserAnimationsModule,
+    LoginModule,
+    DashboardModule,
     ToastrModule.forRoot()
   ],
   providers: [],

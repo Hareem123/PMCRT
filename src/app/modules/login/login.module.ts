@@ -5,15 +5,17 @@ import { ParticlesModule } from 'angular-particle';
 
 import { LoginRoutingModule } from './login-routing.module';
 import { LoginComponent } from './login/login.component';
+import { FooterLayoutComponent } from '../../layouts/footer-layout/footer-layout.component';
 
 @NgModule({
-  declarations: [LoginComponent],
+  declarations: [LoginComponent, FooterLayoutComponent],
   imports: [
     CommonModule,
     LoginRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    ParticlesModule
-  ]
+    ParticlesModule,
+  ],
+  exports: [FooterLayoutComponent],
 })
 export class LoginModule { }
