@@ -1,7 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import { ToastrService } from "ngx-toastr";
-import { Router } from "@angular/router";
-import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { FormGroup } from "@angular/forms";
 
 import { VolunteerService } from "../../../services/volunteer.service";
 
@@ -17,9 +15,6 @@ export class VolunteerComponent implements OnInit {
 
   constructor(
     private volunteerService: VolunteerService,
-    private formBuilder: FormBuilder,
-    private router: Router,
-    private toastr: ToastrService
   ) {}
 
   ngOnInit() {
@@ -29,7 +24,6 @@ export class VolunteerComponent implements OnInit {
     this.volunteerService.getVolunteerData().subscribe(res => {
       if (res["success"]) {
         this.data = res["response"];
-        console.log(this.data);
       }
     });
   }

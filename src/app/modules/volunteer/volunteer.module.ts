@@ -3,16 +3,17 @@ import { CommonModule } from "@angular/common";
 
 import { VolunteerRoutingModule } from "./volunteer-routing.module";
 import { VolunteerComponent } from "./volunteer/volunteer.component";
-import { HeaderComponent } from "./header/header.component";
 import { DataTableModule } from "angular-6-datatable";
 
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { DashboardModule } from '../dashboard/dashboard.module';
 @NgModule({
-  declarations: [VolunteerComponent, HeaderComponent],
+  declarations: [VolunteerComponent],
   imports: [
     CommonModule,
     VolunteerRoutingModule,
     DataTableModule,
+    DashboardModule,
     FormsModule,
     ReactiveFormsModule
   ]

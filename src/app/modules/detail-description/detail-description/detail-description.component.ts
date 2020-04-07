@@ -24,45 +24,25 @@ export class DetailDescriptionComponent implements OnInit {
 
   constructor(
     private detailDashboardService: DetailDashboardService,
-    private formBuilder: FormBuilder,
-    private router: Router,
-    private toastr: ToastrService,
     private route: ActivatedRoute
   ) {}
-  // paramsData: ParamsData = { params: { title: '', field: ''} };
-  paramsData: any = {};
   tableData: any = [];
   title: String = '';
+  field: String = '';
 
   ngOnInit() {
-    this.route.queryParamMap.subscribe(params => {
-      this.paramsData = { ...params.keys, ...params };
-      this.title = this.paramsData.params.title;
+    this.route.queryParamMap.subscribe((paramsData: any) => {
+      const { params } = paramsData;
+      this.title = params.title;
+      this.field = params.field;
     });
-    this.getCardData(this.paramsData.params);
+    this.getCardData(this.field);
   }
 
-  getCardData(paramData) {
-    this.detailDashboardService.getCardData(paramData).subscribe(res => {
+  getCardData(field) {
+    this.detailDashboardService.getCardData(field).subscribe(res => {
       if (res["success"]) {
-        console.log('api response', res);
         this.tableData = res["response"]["objects"];
-
-        // TODO ideally different models and transformers should be created that will
-        // transform the response object according to the filter provided
-        if(this.paramsData.params.field == 'totalVolunteers' || this.paramsData.params.field == 'todaysRegistrations') { 
-                    
-          this.tableData = this.tableData.map((object) => {
-              delete object.facebook_handle;
-              delete object.twitter_handle;
-              delete object.latitude;
-              delete object.longitude;
-              delete object.agree;
-              delete object.role;
-              return object;
-
-        });
-      }
       }
     });
   }
