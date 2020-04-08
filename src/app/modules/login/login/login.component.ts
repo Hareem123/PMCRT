@@ -27,14 +27,10 @@ export class LoginComponent implements OnInit {
   myParams: any;
 
   ngOnInit() {
-    this.loginPageUI();
-
-    var user = localStorage.getItem("authStreetLightUser");
-    var obj = JSON.parse(user);
-    if (obj) {
-      this.userService.verifytoken(obj["response"]["token"]);
+    if(this.userService.isUserAuthorized()) {
+      this.router.navigate(['/dashboard'])
     }
-
+    this.loginPageUI();
     this.loginForm = this.formBuilder.group({
       email: [null, Validators.email],
       password: [
@@ -48,27 +44,14 @@ export class LoginComponent implements OnInit {
     });
   }
 
-  // addModal(id) {
-  //   $(id).css("display", "block");
-  //   $(".modal_extra").css("display", "block");
-  //   $("#modalEvents").css({ background: "#0000005e" });
-  // }
-  // closeModal(id) {
-  //   $(id).css("display", "none");
-  //   $(".modal_extra").css("display", "none");
-  //   // this.eventForm.reset();
-  //   // this.eventUpdateForm.reset();
-  // }
   onSubmit(value) {
     console.log(value.value);
     this.loading = true;
     this.userService.loginUser(value.value).subscribe(
-      res => {
-        console.log(res);
+      (res: any) => {
         if (res["success"]) {
           this.loading = false;
-          localStorage.setItem("authorization", JSON.stringify(res));
-
+          this.userService.setLoginUser(res.response);
           this.loginForm.reset();
           this.router.navigate(["/dashboard"]);
           this.toastr.success("Login Successful", res["response"]["email"]);

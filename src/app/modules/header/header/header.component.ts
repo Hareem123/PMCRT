@@ -1,6 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { ToastrService } from "ngx-toastr";
 import { Router } from "@angular/router";
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: "app-header",
@@ -8,17 +9,21 @@ import { Router } from "@angular/router";
   styleUrls: ["./header.component.css"]
 })
 export class HeaderComponent implements OnInit {
-  currentUser: any;
+  currentUser: any = { email: '' };
   isLoggedIn = false;
 
-  constructor(private router: Router, private toastr: ToastrService) {}
+  constructor(private router: Router, private toastr: ToastrService, private userService: UserService) {
+    this.currentUser = this.userService.getCurrentUser();
+  }
 
   ngOnInit() {
-    var user = localStorage.getItem("authorization");
-    this.currentUser = JSON.parse(user);
+    if(!this.userService.isUserAuthorized()) {
+      return this.router.navigate(['/login']);
+    }
   }
+
   logout() {
-    localStorage.removeItem("authorization");
+    this.userService.logoutUser();
     this.router.navigate(["/login"]);
   }
 }

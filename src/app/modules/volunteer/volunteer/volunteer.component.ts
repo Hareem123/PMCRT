@@ -2,6 +2,8 @@ import { Component, OnInit } from "@angular/core";
 import { FormGroup } from "@angular/forms";
 
 import { VolunteerService } from "../../../services/volunteer.service";
+import { UserService } from 'src/app/services/user.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: "app-volunteer",
@@ -15,9 +17,14 @@ export class VolunteerComponent implements OnInit {
 
   constructor(
     private volunteerService: VolunteerService,
+    private userService: UserService,
+    private router: Router,
   ) {}
 
   ngOnInit() {
+    if(!this.userService.isUserAuthorized()) {
+      this.router.navigate(['/login']);
+    }
     this.getVolunteerData();
   }
   getVolunteerData() {
