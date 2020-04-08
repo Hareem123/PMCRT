@@ -3,54 +3,42 @@ import { Router } from "@angular/router";
 import { ToastrService } from "ngx-toastr";
 import { BaseUrlService } from "./base-url.service";
 import {
-  HttpClientModule,
   HttpClient,
   HttpHeaders,
 } from "@angular/common/http";
-
+import { UserService } from './user.service';
 @Injectable({
   providedIn: "root",
 })
 export class DetailDashboardService {
-  token: any = "";
-
   constructor(
     private baseUrl: BaseUrlService,
     private router: Router,
     private httpClient: HttpClient,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private userService: UserService
   ) {}
 
   getCardData(filter) {
-    console.log(filter);
-    var user = localStorage.getItem("authorization");
-    var obj = JSON.parse(user);
-    if (obj) {
-      this.token = obj["response"]["token"];
-    }
-    let headers = new HttpHeaders({ Authorization: "jwt " + this.token });
-    // tslint:disable-next-line: max-line-length
-    return this.httpClient.get(
-      this.baseUrl.url() + "dashboardFilter?filter=" + filter,
-      {
-        headers: headers,
-      }
-    );
+    const token = this.userService.getUserToken();
+      let headers = new HttpHeaders({ Authorization: "jwt " + token });
+      // tslint:disable-next-line: max-line-length
+      return this.httpClient.get(
+        this.baseUrl.url() + "dashboardFilter?filter=" + filter,
+        {
+          headers: headers,
+        }
+      );
   }
   getPieData(filter) {
-    console.log(filter);
-    var user = localStorage.getItem("authorization");
-    var obj = JSON.parse(user);
-    if (obj) {
-      this.token = obj["response"]["token"];
-    }
-    let headers = new HttpHeaders({ Authorization: "jwt " + this.token });
-    // tslint:disable-next-line: max-line-length
-    return this.httpClient.get(
-      this.baseUrl.url() + "dashboardFilter?filter=" + filter,
-      {
-        headers: headers,
-      }
-    );
+    const token = this.userService.getUserToken();
+      let headers = new HttpHeaders({ Authorization: "jwt " + token });
+      // tslint:disable-next-line: max-line-length
+      return this.httpClient.get(
+        this.baseUrl.url() + "dashboardFilter?filter=" + filter,
+        {
+          headers: headers,
+        }
+      );
   }
 }

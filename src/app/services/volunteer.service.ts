@@ -4,28 +4,26 @@ import {
   HttpClient,
   HttpHeaders
 } from "@angular/common/http";
+import { UserService } from './user.service';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: "root"
 })
 export class VolunteerService {
-  token: any = "";
-
   constructor(
     private baseUrl: BaseUrlService,
     private httpClient: HttpClient,
-  ) {}
+    private userService: UserService,
+    private router: Router,
+  ) { }
 
   getVolunteerData() {
-    var user = localStorage.getItem("authorization");
-    var obj = JSON.parse(user);
-    if (obj) {
-      this.token = obj["response"]["token"];
-    }
-    let headers = new HttpHeaders({ Authorization: "jwt " + this.token });
-    // tslint:disable-next-line: max-line-length
-    return this.httpClient.get(this.baseUrl.url() + "volunteersPanel", {
-      headers: headers
-    });
+    const token = this.userService.getUserToken();
+      let headers = new HttpHeaders({ Authorization: "jwt " + token });
+      // tslint:disable-next-line: max-line-length
+      return this.httpClient.get(this.baseUrl.url() + "volunteersPanel", {
+        headers: headers
+      });
   }
 }

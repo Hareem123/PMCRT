@@ -6,6 +6,7 @@ import { ActivatedRoute } from "@angular/router";
 // import "rxjs/add/operator/filter";
 
 import { DetailDashboardService } from "../../../services/detail-dashboard.service";
+import { UserService } from 'src/app/services/user.service';
 
 interface ParamsData {
   params: { title: String,
@@ -24,13 +25,18 @@ export class DetailDescriptionComponent implements OnInit {
 
   constructor(
     private detailDashboardService: DetailDashboardService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private userService: UserService,
+    private router: Router,
   ) {}
   tableData: any = [];
   title: String = '';
   field: String = '';
 
   ngOnInit() {
+    if(!this.userService.isUserAuthorized()) {
+        this.router.navigate(['/login']);
+    }
     this.route.queryParamMap.subscribe((paramsData: any) => {
       const { params } = paramsData;
       this.title = params.title;

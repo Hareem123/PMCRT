@@ -4,6 +4,7 @@ import { Router } from "@angular/router";
 
 import { CountUp } from "CountUp.js";
 import { DashboardService } from "../../../services/dashboard.service";
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: "app-dashboard",
@@ -17,10 +18,15 @@ export class DashboardComponent implements OnInit {
   constructor(
     private dashboardService: DashboardService,
     private router: Router,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private userService: UserService,
   ) {}
 
   ngOnInit() {
+    if(!this.userService.isUserAuthorized()) {
+      return this.router.navigate(['/login']);
+    }
+
     this.totalVolunteer = new CountUp("totalVolunteer", 0);
     this.totalVolunteer.start();
 

@@ -7,6 +7,8 @@ import * as am4core from "@amcharts/amcharts4/core";
 import am4themes_animated from "@amcharts/amcharts4/themes/animated";
 import { createOfflineCompileUrlResolver } from '@angular/compiler';
 import randomMC from 'random-material-color';
+import { UserService } from 'src/app/services/user.service';
+import { Router } from '@angular/router';
 
 am4core.useTheme(am4themes_animated);
 
@@ -41,9 +43,15 @@ export class ReportComponent implements OnInit {
   constructor(
     // private formBuilder: FormBuilder,
     private dashboardService: DetailDashboardService,
+    private userService: UserService,
+    private router: Router,
   ) {}
 
   ngOnInit() {
+    if(!this.userService.isUserAuthorized()) {
+      this.router.navigate(['/login']);
+    }
+
     this.dashboardService.getPieData("volunteersAtWork").subscribe((res) => {
       if (res["success"]) {
         const data = res["response"]["objects"];
